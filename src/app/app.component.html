@@ -1,0 +1,26 @@
+<div class="container">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <div class="form-group">
+      <label for="cityName">City</label>
+      <input
+        type="text"
+        class="form-control"
+        id="cityName"
+        aria-describedby="emailHelp"
+        placeholder="Enter city"
+        name="city"
+        [(ngModel)]="city"
+      />
+    </div>
+    <button id="submitButton" type="submit" class="btn btn-primary">
+      Submit
+    </button>
+  </form>
+
+  <div class="container info">
+    <div class="city">
+      <h1>{{ cityName }}</h1>
+    </div>
+    <div class="temperature">{{ temp }} &#8451;</div>
+  </div>
+</div>

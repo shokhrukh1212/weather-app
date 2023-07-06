@@ -1,0 +1,12 @@
+#submitButton {
+  margin-top: 20px;
+}
+.info {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.info > .temperature {
+  font-size: 2em;
+}

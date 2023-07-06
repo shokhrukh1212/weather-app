@@ -1,12 +1,54 @@
-#submitButton {
-  margin-top: 20px;
+@import url("https://fonts.googleapis.com/css2?family=Courgette&family=Indie+Flower&family=Lobster&family=Ubuntu:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Courgette&family=Indie+Flower&family=Lobster&family=Ubuntu:wght@300&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.info {
-  width: 400px;
+div.container-weather {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("../assets/images/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 30px;
+  margin: 0;
+}
+
+input {
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 15px;
+  font-family: "Signika Negative", sans-serif;
+}
+div.temperature h1 {
+  font-size: 6rem;
+}
+
+div.container-weather > form,
+div.main-info {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-family: "Courgette", cursive;
 }
-.info > .temperature {
-  font-size: 2em;
+
+div.belowInfo {
+  margin-top: 60px;
+  font-family: "Indie Flower", cursive;
+}
+
+div.extra-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin-top: 50px;
+  font-family: "Bodoni Moda", serif;
+  font-weight: bold;
+}
+.item {
+  text-align: center;
+  margin: 10px;
 }

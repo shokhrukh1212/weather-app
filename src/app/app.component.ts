@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { WeatherData } from './environment/environment';
-
-import { WeatherService } from './services/weather.service';
+import { WeatherApiService } from './services/weather-api.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,20 +8,25 @@ import { WeatherService } from './services/weather.service';
 })
 export class AppComponent implements OnInit {
   city: string = 'Tashkent';
+  cityId: string = '';
   temp: number = 0;
   cityName: string = '';
   weatherDescription: string = '';
   className: string = '';
-  weatherData!: WeatherData;
+  extraClassName: string = '';
 
   humidity: number = 0;
   windSpeed: number = 0;
   windDegree: number = 0;
-  maxTemp: number = 0;
-  minTemp: number = 0;
+  pressure: number = 0;
+  feelsLike: number = 0;
+  lastUpdate: string = '';
+  timeNow: string = '';
 
-  today: Date = new Date();
-  constructor(private weatherService: WeatherService) {}
+  showExtraInfo: boolean = false;
+  showExtraText: string = 'View More';
+
+  constructor(private weatherApi: WeatherApiService) {}
 
   ngOnInit(): void {
     this.getWeatherData(this.city);
@@ -33,33 +36,45 @@ export class AppComponent implements OnInit {
   onSubmit() {
     this.getWeatherData(this.city);
     this.city = '';
+
+    this.showExtraText = 'View More';
+    this.showExtraInfo = false;
   }
 
   private getWeatherData(city: string) {
-    this.weatherService.getWeatherData(city).subscribe({
+    this.weatherApi.getWeather(city).subscribe({
       next: (res) => {
-        this.temp = Math.ceil(res.main.temp - 273.15);
-        this.cityName = res.name;
-        this.weatherData = res;
-        this.weatherDescription = res.weather[0].description.toUpperCase();
-        this.humidity = res.main.humidity;
-        this.windSpeed = res.wind.speed;
-        this.windDegree = res.wind.deg;
-        this.maxTemp = Math.ceil(res.main.temp_max - 273.15);
-        this.minTemp = Math.ceil(res.main.temp_min - 273.15);
+        this.temp = Math.round(res.current.temp_c);
+        this.cityName = `${res.location.country}, ${res.location.name}`;
+        this.weatherDescription = res.current.condition.text;
+        this.humidity = res.current.humidity;
+        this.windSpeed = Math.round(res.current.wind_kph);
+        this.windDegree = res.current.wind_degree;
+        this.lastUpdate = res.current.last_updated;
+        this.timeNow = res.location.localtime;
+        this.pressure = res.current.pressure_mb;
+        this.feelsLike = Math.round(res.current.feelslike_c);
 
         // giving a class name depending on a weather
-        if (this.temp >= 0 && this.temp < 10) {
-          this.className = 'container-snowy';
-        } else if (this.temp >= 5 && this.temp <= 20) {
-          this.className = 'container-rainy';
+        if (res.current.is_day === 1) {
+          this.className = 'daytime';
+          this.extraClassName = 'daytimeExtra';
         } else {
-          this.className = 'container-shiny';
+          this.className = 'nighttime';
+          this.extraClassName = 'nighttimeExtra';
         }
-
-        console.log(res);
       },
       error: (err) => console.log('Error: ', err),
     });
+  }
+
+  onShowExtra() {
+    if (this.showExtraInfo === false) {
+      this.showExtraText = 'View Less';
+      this.showExtraInfo = true;
+    } else {
+      this.showExtraText = 'View More';
+      this.showExtraInfo = false;
+    }
   }
 }

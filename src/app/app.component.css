@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Courgette&family=Indie+Flower&family=Lobster&family=Ubuntu:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Courgette&family=Indie+Flower&family=Lobster&family=Ubuntu:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Courgette&family=Indie+Flower&family=Libre+Baskerville&family=Lobster&family=Signika+Negative:wght@300&family=Ubuntu:wght@300&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +10,6 @@
 div.container-weather {
   width: 100%;
   min-height: 100vh;
-  background-image: url("../assets/images/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 30px;
@@ -36,19 +37,54 @@ div.main-info {
 }
 
 div.belowInfo {
-  margin-top: 60px;
+  margin-top: 40px;
   font-family: "Indie Flower", cursive;
+}
+
+div.belowInfo > div.weatherDes > p {
+  font-size: 2em;
+}
+
+div.showExtraBtn {
+  text-align: center;
+}
+
+div.showExtraBtn > button {
+  padding: 10px 40px;
+  margin-top: 10px;
 }
 
 div.extra-info {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  margin-top: 50px;
+  margin-top: 30px;
   font-family: "Bodoni Moda", serif;
   font-weight: bold;
+  /* background-color: white; */
+}
+div.extra-info h3 {
+  font-family: "Libre Baskerville", serif;
+
+  font-size: 2em;
 }
 .item {
   text-align: center;
   margin: 10px;
+}
+
+.daytime {
+  background-image: url("../assets/images/day.jpg");
+  color: darkolivegreen;
+}
+.daytimeExtra {
+  color: #000;
+}
+
+.nighttime {
+  background-image: url("../assets/images/night.jpg");
+  color: yellow;
+}
+.nighttimeExtra {
+  color: #fff;
 }

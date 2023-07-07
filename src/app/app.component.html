@@ -1,4 +1,4 @@
-<div class="container-weather">
+<div class="container-weather" [ngClass]="className">
   <form #form="ngForm" (submit)="onSubmit()">
     <div class="form-group">
       <input
@@ -16,7 +16,14 @@
         <h1>{{ cityName }}</h1>
       </div>
       <div class="dayInfo">
-        <p>{{ today | date : "EEEE, MMMM d, y, h:mm:ss a" }}</p>
+        <p>
+          Last updated:
+          <span>{{ lastUpdate | date : "EEEE, MMMM d, y, h:mm:ss a" }}</span>
+        </p>
+        <p>
+          Time:
+          <span>{{ timeNow | date : "EEEE, MMMM d, y, h:mm:ss a" }}</span>
+        </p>
       </div>
     </div>
     <div class="belowInfo">
@@ -29,22 +36,28 @@
     </div>
   </div>
 
-  <div class="extra-info">
+  <div class="extra-info" *ngIf="showExtraInfo" [ngClass]="extraClassName">
     <div class="item">
       <h3>Humidity</h3>
       <p>{{ humidity }} %</p>
     </div>
     <div class="item">
       <h3>Wind</h3>
-      <p>{{ windDegree }} deg, {{ windSpeed }} m/s</p>
+      <p>{{ windDegree }} deg, {{ windSpeed }} km/h</p>
     </div>
     <div class="item">
-      <h3>Max temperature</h3>
-      <p>{{ maxTemp }} &#8451;</p>
+      <h3>Pressure</h3>
+      <p>{{ pressure }} mb</p>
     </div>
     <div class="item">
-      <h3>Min temperature</h3>
-      <p>{{ minTemp }} &#8451;</p>
+      <h3>RealFeel Shade</h3>
+      <p>{{ feelsLike }} &#8451;</p>
     </div>
+  </div>
+
+  <div class="showExtraBtn">
+    <button class="btn btn-primary" (click)="onShowExtra()">
+      {{ showExtraText }}
+    </button>
   </div>
 </div>

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class WeatherApiService {
   constructor(private http: HttpClient) {}
 
-  private base_url = 'http://api.weatherapi.com/v1';
+  private base_url = 'https://api.weatherapi.com/v1';
   private API_KEY = '4edba3442f5e4a8aac270325230707';
 
   getWeather(city: string): Observable<any> {
